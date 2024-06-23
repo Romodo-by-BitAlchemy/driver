@@ -1,4 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:driver/pages/fpassword.dart';
+import 'package:driver/pages/getemail.dart';
+import 'package:driver/pages/login.dart';
+//import 'package:pass_log/pages/logout.dart';
+import 'package:driver/pages/rpassword.dart';
+//import 'package:pass_log/pages/signup.dart';
+import 'package:driver/pages/updatep.dart';
+import 'package:driver/components/bottom_nav_bar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,10 +39,29 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+      
+      
+  routes: {
+    '/login': (context) => const LoginScreen(title: '',),
+    //'/signup': (context) => const SignUpScreen(),
+    '/fpassword': (context) => ForgotPassword(),
+    '/rpassword': (context) => const ResetPassword(token: ''),
+    '/dashboard': (context) => const MyHomePage(title: 'Dashboard'),
+    //'/logout': (context) =>  Logout(),
+    '/updateDriver': (context) => UpdateDriverScreen(
+              driverEmail: ModalRoute.of(context)!.settings.arguments as String,
+            ),
+     '/get_email': (context) => GetEmailScreen(),
+    
+  },
+  initialRoute: '/login', // Set the initial route
+);
+
+    
   }
 }
+
+
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -56,6 +83,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  int _selectedIndex = 0;
 
   void _incrementCounter() {
     setState(() {
@@ -66,6 +94,26 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
     });
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+    switch (index) {
+      case 0:
+        Navigator.pushNamed(context, '/menu');
+        break;
+      case 1:
+        Navigator.pushNamed(context, '/home');
+        break;
+      case 2:
+        Navigator.pushNamed(context, '/romodo');
+        break;
+      case 3:
+        Navigator.pushNamed(context, '/account');
+        break;
+    }
   }
 
   @override
@@ -120,6 +168,10 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+      bottomNavigationBar: BottomNavBar(
+        selectedIndex: _selectedIndex,
+        onItemSelected: _onItemTapped,
+      ),
     );
   }
 }
