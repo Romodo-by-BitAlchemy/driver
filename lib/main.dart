@@ -1,3 +1,4 @@
+import 'package:driv2/page/formPage.dart';
 import 'package:flutter/material.dart';
 import 'package:driver/pages/fpassword.dart';
 import 'package:driver/pages/getemail.dart';
@@ -8,18 +9,16 @@ import 'package:driver/pages/rpassword.dart';
 import 'package:driver/pages/updatep.dart';
 import 'package:driver/components/bottom_nav_bar.dart';
 
+
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Incident Form',
       theme: ThemeData(
         // This is the theme of your application.
         //
